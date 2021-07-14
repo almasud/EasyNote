@@ -2,40 +2,26 @@ package com.github.almasud.NotePad.views;
 
 import android.os.Build;
 import android.os.Bundle;
-
-import com.github.almasud.NotePad.R;
-import com.google.android.material.bottomappbar.BottomAppBar;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.snackbar.Snackbar;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.util.ArraySet;
+import android.view.MenuItem;
 import android.view.View;
 
-import androidx.appcompat.widget.Toolbar;
+import com.github.almasud.NotePad.R;
+import com.github.almasud.NotePad.databinding.ActivityMainBinding;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.util.HashSet;
+import java.util.Set;
+
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
-import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-
-import com.github.almasud.NotePad.databinding.ActivityMainBinding;
-
-import android.view.Menu;
-import android.view.MenuItem;
-
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding mViewBinding;
     private AppBarConfiguration mAppBarConfiguration;
     private BottomNavigationView mBottomNavigationView;
-//    private BottomAppBar mBottomAppBar;
     private NavController mNavController;
     private Set<Integer> mTopLevelDestinations = new HashSet<>();
 
@@ -51,11 +37,6 @@ public class MainActivity extends AppCompatActivity {
 
         // Initialize the bottom navigation view and inflate the menus
         mBottomNavigationView = mViewBinding.bottomNavigation;
-//        mBottomNavigationView.inflateMenu(R.menu.menu_bottom_navigation);
-        mBottomNavigationView.setBackground(null);
-        // Initialize the bottom app bar and replace the menus
-//        mBottomAppBar = mViewBinding.bottomAppBar;
-//        mBottomAppBar.replaceMenu(R.menu.menu_bottom_navigation);
 
         // Initialize the navigation controller
         mNavController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
@@ -72,12 +53,6 @@ public class MainActivity extends AppCompatActivity {
         // Setup navigation controller with action bar and bottom navigation view
         NavigationUI.setupActionBarWithNavController(this, mNavController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(mBottomNavigationView, mNavController);
-//        NavigationUI.setupWithNavController(mBottomAppBar, mNavController);
-
-        // Set the bottom app bar menu item in navigation controller
-//        mBottomAppBar.setOnMenuItemClickListener(item ->
-//                NavigationUI.onNavDestinationSelected(item, mNavController)
-//        );
 
         // Listen the navigation destination change and take necessary actions
         mNavController.addOnDestinationChangedListener((controller, destination, arguments) -> {
