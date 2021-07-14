@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/navHome">
+
+    <fragment
+        android:id="@+id/navCalendar"
+        android:name="com.github.almasud.NotePad.views.fragments.CalendarScreen"
+        android:label="@string/calendar"
+        tools:layout="@layout/fragment_calender"/>
+    <fragment
+        android:id="@+id/navNote"
+        android:name="com.github.almasud.NotePad.views.fragments.NoteScreen"
+        android:label="@string/my_notes"
+        tools:layout="@layout/fragment_note"/>
+    <fragment
+        android:id="@+id/navHome"
+        android:name="com.github.almasud.NotePad.views.fragments.HomeScreen"
+        android:label="@string/home"
+        tools:layout="@layout/fragment_home"/>
+    <fragment
+        android:id="@+id/navFavorite"
+        android:name="com.github.almasud.NotePad.views.fragments.FavoriteScreen"
+        android:label="@string/favorites"
+        tools:layout="@layout/fragment_favorite"/>
+    <fragment
+        android:id="@+id/navSettings"
+        android:name="com.github.almasud.NotePad.views.fragments.SettingScreen"
+        android:label="@string/settings"
+        tools:layout="@layout/fragment_setting"/>
+</navigation>

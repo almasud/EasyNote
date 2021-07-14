@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/navCalendar"
+        android:title="@string/calendar"
+        android:icon="@drawable/ic_calendar"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/navNote"
+        android:title="@string/my_notes"
+        android:icon="@drawable/ic_documents"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/holder"
+        android:title=""
+        app:showAsAction="ifRoom"
+        android:enabled="false"/>
+
+    <item
+        android:id="@+id/navFavorite"
+        android:title="@string/favorites"
+        android:icon="@drawable/ic_heart"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/navSettings"
+        android:title="@string/settings"
+        android:icon="@drawable/ic_settigns"
+        app:showAsAction="always"/>
+
+</menu>
