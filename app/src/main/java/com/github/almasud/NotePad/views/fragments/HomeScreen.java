@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 
 public class HomeScreen extends Fragment {
 
-    private FragmentHomeBinding binding;
+    private FragmentHomeBinding mViewBinding;
 
     @Override
     public View onCreateView(
@@ -20,8 +20,8 @@ public class HomeScreen extends Fragment {
             Bundle savedInstanceState
     ) {
 
-        binding = FragmentHomeBinding.inflate(inflater, container, false);
-        return binding.getRoot();
+        mViewBinding = FragmentHomeBinding.inflate(inflater, container, false);
+        return mViewBinding.getRoot();
 
     }
 
@@ -33,7 +33,7 @@ public class HomeScreen extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        binding = null;
+        mViewBinding = null;
     }
 
 }

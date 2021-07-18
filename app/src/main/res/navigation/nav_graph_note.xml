@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph"
+    android:id="@+id/nav_graph_note"
     app:startDestination="@id/navHome">
 
     <fragment
@@ -14,7 +14,11 @@
         android:id="@+id/navNote"
         android:name="com.github.almasud.NotePad.views.fragments.NoteScreen"
         android:label="@string/my_notes"
-        tools:layout="@layout/fragment_note"/>
+        tools:layout="@layout/fragment_note">
+        <action
+            android:id="@+id/action_navNote_to_navNoteForm"
+            app:destination="@id/navNoteForm" />
+    </fragment>
     <fragment
         android:id="@+id/navHome"
         android:name="com.github.almasud.NotePad.views.fragments.HomeScreen"
@@ -30,4 +34,19 @@
         android:name="com.github.almasud.NotePad.views.fragments.SettingScreen"
         android:label="@string/settings"
         tools:layout="@layout/fragment_setting"/>
+    <fragment
+        android:id="@+id/navNoteForm"
+        android:name="com.github.almasud.NotePad.views.fragments.NoteFormScreen"
+        android:label="{title}"
+        tools:layout="@layout/fragment_note_form" >
+        <argument
+            android:name="note"
+            app:argType="com.github.almasud.NotePad.models.Note"
+            app:nullable="true"
+            android:defaultValue="@null"/>
+        <argument
+            android:name="title"
+            app:argType="string"
+            android:defaultValue="Note Form"/>
+    </fragment>
 </navigation>

@@ -1,6 +1,5 @@
-package com.github.almasud.NotePad.views;
+package com.github.almasud.NotePad.views.activity;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,12 +17,12 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-public class MainActivity extends AppCompatActivity {
+public class MainScreen extends AppCompatActivity {
     private ActivityMainBinding mViewBinding;
     private AppBarConfiguration mAppBarConfiguration;
     private BottomNavigationView mBottomNavigationView;
     private NavController mNavController;
-    private Set<Integer> mTopLevelDestinations = new HashSet<>();
+    private final Set<Integer> mTopLevelDestinations = new HashSet<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,9 +65,7 @@ public class MainActivity extends AppCompatActivity {
                 mViewBinding.toolbar.setVisibility(View.GONE);
             } else {
                 // Show the toolbar and change the back arrow icon
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
-                    getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_back_ios);
-                }
+                getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_back_ios);
                 mViewBinding.toolbar.setVisibility(View.VISIBLE);
             }
         });

@@ -26,4 +26,10 @@
         <!-- Customize color of navigation drawer and popup icons -->
         <item name="colorControlNormal">@color/colorSecondary</item>
     </style>
+
+    <!-- Style for input box -->
+    <style name="Theme.NotePad.InputLayoutStyleOutlineBox" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@drawable/input_layout_outline_box</item>
+    </style>
+
 </resources>

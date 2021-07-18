@@ -5,14 +5,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.github.almasud.NotePad.databinding.FragmentFavoriteBinding;
+import com.github.almasud.NotePad.databinding.FragmentNoteDetailsBinding;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-public class FavoriteScreen extends Fragment {
+public class NoteDetailsScreen extends Fragment {
 
-    private FragmentFavoriteBinding mViewBinding;
+    private FragmentNoteDetailsBinding mViewBinding;
 
     @Override
     public View onCreateView(
@@ -20,7 +20,7 @@ public class FavoriteScreen extends Fragment {
             Bundle savedInstanceState
     ) {
 
-        mViewBinding = FragmentFavoriteBinding.inflate(inflater, container, false);
+        mViewBinding = FragmentNoteDetailsBinding.inflate(inflater, container, false);
         return mViewBinding.getRoot();
 
     }

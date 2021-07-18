@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">NotePad</string>
+    <string name="app_name">Easy Note</string>
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
     <string name="home">Home</string>
@@ -9,4 +9,23 @@
     <string name="settings">Settings</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
+    <string name="welcome">Welcome</string>
+    <string name="search">Search</string>
+    <string name="notes">Notes</string>
+    <string name="schedulers">Schedulers</string>
+    <string name="reminders">Reminders</string>
+    <string name="search_your_notes">Search your Notes</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title">Title</string>
+    <string name="details">Details</string>
+    <string name="create">Create</string>
+    <string name="please_wait">Please wait&#8230;</string>
+    <string name="date">Date</string>
+    <string name="note_form">Note Form</string>
+    <string name="update">Update</string>
+    <string name="note_save_wait_message">Please wait while saving your note&#8230;</string>
+    <string name="color_palette">Color palette</string>
+    <string name="colors">Colors</string>
+    <string name="no_note_yet">You haven\'t any note yet!</string>
 </resources>
