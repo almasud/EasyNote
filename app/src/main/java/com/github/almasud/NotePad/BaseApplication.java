@@ -2,14 +2,18 @@ package com.github.almasud.NotePad;
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
@@ -106,6 +110,145 @@ public class BaseApplication extends Application implements LifecycleObserver {
                 enableDisableViewGroup((ViewGroup) view, enabled);
             }
         }
+    }
+
+    /**
+     * Set an {@link AlertDialog} with only a positive action button.
+     * @param context A {@link Context} of the application.
+     * @param customView A custom {@link View} of {@link AlertDialog}.
+     * @param title A {@link String} for {@link AlertDialog} title.
+     * @param iconRes A {@link DrawableRes} for {@link AlertDialog} icon.
+     * @param message A {@link String} for {@link AlertDialog} message.
+     * @param positiveButtonAction An {@link OnSingleAction} for positive action button.
+     * @param positiveButtonText A {@link String} for positive action button.
+     */
+    public static void setAlertDialog(
+            Context context, View customView, String title, int iconRes, String message,
+            OnSingleAction positiveButtonAction, String positiveButtonText) {
+
+        // Set only required parameter to the main method
+        setAlertDialog(
+                context, customView, title, iconRes, message,
+                positiveButtonAction, positiveButtonText,
+                null, null,
+                null, null
+        );
+    }
+
+    /**
+     * Set an {@link AlertDialog} with positive and negative action button.
+     * @param context A {@link Context} of the application.
+     * @param customView A custom {@link View} of {@link AlertDialog}.
+     * @param title A {@link String} for {@link AlertDialog} title.
+     * @param iconRes A {@link DrawableRes} for {@link AlertDialog} icon.
+     * @param message A {@link String} for {@link AlertDialog} message.
+     * @param positiveButtonAction An {@link OnSingleAction} for positive action button.
+     * @param positiveButtonText A {@link String} for positive action button.
+     * @param negativeButtonAction An {@link OnSingleAction} for negative action button.
+     * @param negativeButtonText A {@link String} for negative action button.
+     */
+    public static void setAlertDialog(
+            Context context, View customView, String title, int iconRes, String message,
+            OnSingleAction positiveButtonAction, String positiveButtonText,
+            OnSingleAction negativeButtonAction, String negativeButtonText) {
+
+        // Set only required parameter to the main method
+        setAlertDialog(
+                context, customView, title, iconRes, message,
+                positiveButtonAction, positiveButtonText,
+                negativeButtonAction, negativeButtonText,
+                null, null
+        );
+    }
+
+    /**
+     * Set an {@link AlertDialog} with a custom {@link View} and positive, negative and neutral action button.
+     * @param context A {@link Context} of the application.
+     * @param customView A custom {@link View} of {@link AlertDialog}.
+     * @param title A {@link String} for {@link AlertDialog} title.
+     * @param iconRes A {@link DrawableRes} for {@link AlertDialog} icon.
+     * @param message A {@link String} for {@link AlertDialog} message.
+     * @param positiveButtonAction An {@link OnSingleAction} for positive action button.
+     * @param positiveButtonText A {@link String} for positive action button.
+     * @param negativeButtonAction An {@link OnSingleAction} for negative action button.
+     * @param negativeButtonText A {@link String} for negative action button.
+     * @param neutralButtonAction An {@link OnSingleAction} for neutral action button.
+     * @param neutralButtonText A {@link String} for neutral action button.
+     */
+    public static void setAlertDialog(
+            Context context, View customView, String title, int iconRes, String message,
+            OnSingleAction positiveButtonAction, String positiveButtonText,
+            OnSingleAction negativeButtonAction, String negativeButtonText,
+            OnSingleAction neutralButtonAction, String neutralButtonText) {
+
+        // Create an alert dialog to show a dialog message
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
+        dialogBuilder.setCancelable(false);
+        // Set a custom view
+        if (customView != null)
+            dialogBuilder.setView(customView);
+        // Set a title
+        if (title != null)
+            dialogBuilder.setTitle(title);
+        // Set an image resource
+        if (iconRes != -1)
+            dialogBuilder.setIcon(iconRes);
+        // Set a message
+        if (message != null)
+            dialogBuilder.setMessage(message);
+
+        // Set an action for positive button
+        if (positiveButtonAction != null) {
+            dialogBuilder.setPositiveButton(
+                    (positiveButtonText != null)? positiveButtonText
+                            : context.getResources().getString(R.string.action_yes),
+                    (dialog, which) -> positiveButtonAction.onAction()
+            );
+        }
+
+        // Set an action for negative button
+        if (negativeButtonAction != null) {
+            dialogBuilder.setNegativeButton(
+                    (negativeButtonText != null)? negativeButtonText
+                            : context.getResources().getString(R.string.action_no),
+                    (dialog, which) -> negativeButtonAction.onAction()
+            );
+        }
+
+        // Set an action for neutral button
+        if (neutralButtonAction != null) {
+            dialogBuilder.setNeutralButton(
+                    (neutralButtonText != null)? neutralButtonText
+                            : context.getResources().getString(R.string.action_not_sure),
+                    (dialog, which) -> neutralButtonAction.onAction()
+            );
+        }
+
+        // To avoid the block of UI (main) thread execute the task within a new thread.
+        new Handler().post(() -> {
+            AlertDialog dialog = dialogBuilder.create();
+            dialog.show();
+
+            // This line always placed after the dialog.show() otherwise get a Null Pinter Exception.
+            // Set all caps false to al alert dialog buttons
+            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setAllCaps(false);
+            dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setAllCaps(false);
+            dialog.getButton(AlertDialog.BUTTON_NEUTRAL).setAllCaps(false);
+            // Change the buttons text color
+            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(
+                    context.getResources().getColor(R.color.colorSecondary)
+            );
+            dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(
+                    context.getResources().getColor(R.color.colorSecondary)
+            );
+            dialog.getButton(AlertDialog.BUTTON_NEUTRAL).setTextColor(
+                    context.getResources().getColor(R.color.colorSecondary)
+            );
+        });
+    }
+
+    public static interface OnSingleAction {
+        void onAction();
     }
 
 }

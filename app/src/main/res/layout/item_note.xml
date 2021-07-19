@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     app:cardElevation="10dp"
@@ -16,7 +16,7 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cvNoteColor"
             android:layout_width="@dimen/activity_half_margin"
-            android:layout_height="match_parent"
+            android:layout_height="100dp"
             app:cardBackgroundColor="@color/colorSecondary"
             app:cardElevation="10dp"
             app:cardCornerRadius="15dp"
@@ -75,8 +75,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="3.5"
-                android:orientation="vertical"
-                android:padding="5dp">
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/tvNoteTitle"
@@ -91,9 +90,10 @@
                     android:id="@+id/tvNoteDetails"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="For technical revisions and this the maximum lines text"
+                    tools:text="For technical revisions. For technical revisions."
                     android:textSize="18sp"
-                    android:textColor="@color/black"
+                    android:textColor="@color/colorGrayDeep"
+                    android:paddingVertical="@dimen/activity_half_margin"
                     android:ellipsize="end"
                     android:maxLines="1" />
 

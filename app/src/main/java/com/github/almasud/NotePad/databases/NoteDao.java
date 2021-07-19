@@ -9,6 +9,7 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
+import io.reactivex.Completable;
 import io.reactivex.Single;
 
 /**
@@ -41,8 +42,8 @@ public interface NoteDao {
     Single<Note> getFavoriteNote(int id);
 
     @Update
-    Single<Integer> update(Note note);
+    Completable update(Note note);
 
     @Delete
-    Single<Integer> delete(Note note);
+    Completable delete(Note note);
 }

@@ -18,6 +18,9 @@
         <action
             android:id="@+id/action_navNote_to_navNoteForm"
             app:destination="@id/navNoteForm" />
+        <action
+            android:id="@+id/action_navNote_to_navNoteDetails"
+            app:destination="@id/navNoteDetails" />
     </fragment>
     <fragment
         android:id="@+id/navHome"
@@ -47,6 +50,22 @@
         <argument
             android:name="title"
             app:argType="string"
-            android:defaultValue="Note Form"/>
+            android:defaultValue="Make a Note"/>
+    </fragment>
+    <fragment
+        android:id="@+id/navNoteDetails"
+        android:name="com.github.almasud.NotePad.views.fragments.NoteDetailsScreen"
+        android:label="{title}"
+        tools:layout="@layout/fragment_note_details" >
+        <argument
+            android:name="noteId"
+            app:argType="integer" />
+        <argument
+            android:name="title"
+            app:argType="string"
+            android:defaultValue="Note Details" />
+        <action
+            android:id="@+id/action_navNoteDetails_to_navNoteForm"
+            app:destination="@id/navNoteForm" />
     </fragment>
 </navigation>

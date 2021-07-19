@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import io.reactivex.CompletableObserver;
 import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -22,7 +23,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 public class NoteVM extends AndroidViewModel {
-    private static final String TAG = "NoteViewModel";
+    private static final String TAG = "NoteVM";
     private final NoteDao mNoteDao;
     private final MutableLiveData<Long> mInsertMutableLiveData = new MutableLiveData<>();
     private final MutableLiveData<List<Long>> mInsertsMutableLiveData = new MutableLiveData<>();
@@ -30,8 +31,8 @@ public class NoteVM extends AndroidViewModel {
     private final MutableLiveData<Note> mNoteMutableLiveData = new MutableLiveData<>();
     private final MutableLiveData<List<Note>> mFavoritesMutableLiveData = new MutableLiveData<>();
     private final MutableLiveData<Note> mFavoriteMutableLiveData = new MutableLiveData<>();
-    private final MutableLiveData<Integer> mUpdateMutableLiveData = new MutableLiveData<>();
-    private final MutableLiveData<Integer> mDeleteMutableLiveData = new MutableLiveData<>();
+    private final MutableLiveData<Boolean> mUpdateMutableLiveData = new MutableLiveData<>();
+    private final MutableLiveData<Boolean> mDeleteMutableLiveData = new MutableLiveData<>();
     private CompositeDisposable mDisposable = new CompositeDisposable();
 
     public NoteVM(@NonNull Application application) {
@@ -60,8 +61,8 @@ public class NoteVM extends AndroidViewModel {
 
                     @Override
                     public void onError(@NotNull Throwable e) {
-                        mInsertMutableLiveData.setValue(null);
                         Log.w(TAG, "onError: Failed to insert data: " + e.getMessage());
+                        mInsertMutableLiveData.setValue(null);
                     }
                 });
 
@@ -84,32 +85,32 @@ public class NoteVM extends AndroidViewModel {
 
                     @Override
                     public void onError(@NotNull Throwable e) {
-                        mInsertsMutableLiveData.setValue(null);
                         Log.w(TAG, "onError: Failed to insert data: " + e.getMessage());
+                        mInsertsMutableLiveData.setValue(null);
                     }
                 });
 
         return mInsertsMutableLiveData;
     }
 
-    public LiveData<Integer> update(Note note) {
+    public LiveData<Boolean> update(Note note) {
         mNoteDao.update(note).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new SingleObserver<Integer>() {
+                .subscribe(new CompletableObserver() {
                     @Override
                     public void onSubscribe(@NotNull Disposable d) {
-                        mDisposable.add(d);
+                        mUpdateMutableLiveData.setValue(true);
                     }
 
                     @Override
-                    public void onSuccess(@NotNull Integer noteId) {
-                        mUpdateMutableLiveData.setValue(noteId);
+                    public void onComplete() {
+
                     }
 
                     @Override
                     public void onError(@NotNull Throwable e) {
-                        mUpdateMutableLiveData.setValue(null);
                         Log.w(TAG, "onError: Failed to update data: " + e.getMessage());
+                        mUpdateMutableLiveData.setValue(false);
                     }
                 });
 
@@ -132,8 +133,8 @@ public class NoteVM extends AndroidViewModel {
 
                     @Override
                     public void onError(@NotNull Throwable e) {
-                        mNoteMutableLiveData.setValue(null);
                         Log.w(TAG, "onError: Failed to retrieve data: " + e.getMessage());
+                        mNoteMutableLiveData.setValue(null);
                     }
                 });
 
@@ -156,8 +157,8 @@ public class NoteVM extends AndroidViewModel {
 
                     @Override
                     public void onError(@NotNull Throwable e) {
-                        mFavoriteMutableLiveData.setValue(null);
                         Log.w(TAG, "onError: Failed to retrieve data: " + e.getMessage());
+                        mFavoriteMutableLiveData.setValue(null);
                     }
                 });
 
@@ -172,24 +173,24 @@ public class NoteVM extends AndroidViewModel {
         return mFavoritesMutableLiveData;
     }
 
-    public LiveData<Integer> delete(Note note) {
+    public LiveData<Boolean> delete(Note note) {
         mNoteDao.delete(note).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new SingleObserver<Integer>() {
+                .subscribe(new CompletableObserver() {
                     @Override
                     public void onSubscribe(@NotNull Disposable d) {
-                        mDisposable.add(d);
+                        mDeleteMutableLiveData.setValue(true);
                     }
 
                     @Override
-                    public void onSuccess(@NotNull Integer noteId) {
-                        mDeleteMutableLiveData.setValue(noteId);
+                    public void onComplete() {
+
                     }
 
                     @Override
                     public void onError(@NotNull Throwable e) {
-                        mDeleteMutableLiveData.setValue(null);
                         Log.w(TAG, "onError: Failed to delete data: " + e.getMessage());
+                        mDeleteMutableLiveData.setValue(false);
                     }
                 });
 
@@ -212,8 +213,8 @@ public class NoteVM extends AndroidViewModel {
 
                     @Override
                     public void onError(@NotNull Throwable e) {
-                        mNotesMutableLiveData.setValue(null);
                         Log.w(TAG, "onError: Failed to load data: " + e.getMessage());
+                        mNotesMutableLiveData.setValue(null);
                     }
                 });
     }
@@ -234,8 +235,8 @@ public class NoteVM extends AndroidViewModel {
 
                     @Override
                     public void onError(@NotNull Throwable e) {
-                        mFavoritesMutableLiveData.setValue(null);
                         Log.w(TAG, "onError: Failed to load data: " + e.getMessage());
+                        mFavoritesMutableLiveData.setValue(null);
                     }
                 });
     }

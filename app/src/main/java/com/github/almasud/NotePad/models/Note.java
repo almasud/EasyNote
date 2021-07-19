@@ -42,20 +42,24 @@ public class Note implements Serializable {
     public Note() {
     }
 
-    public Note(@NonNull String title, @NonNull String details, @NonNull String date, int color) {
+    public Note(@NonNull String title, @NonNull String details, @NonNull String date,
+                int color, boolean favorite) {
         this.title = title;
         this.details = details;
         this.date = date;
         this.color = color;
+        this.favorite = favorite;
     }
 
     @Ignore
-    public Note(int id, @NonNull String title, @NonNull String details, @NonNull String date, int color) {
+    public Note(int id, @NonNull String title, @NonNull String details,
+                @NonNull String date, int color, boolean favorite) {
         this.id = id;
         this.title = title;
         this.details = details;
         this.date = date;
         this.color = color;
+        this.favorite = favorite;
     }
 
     public int getId() {

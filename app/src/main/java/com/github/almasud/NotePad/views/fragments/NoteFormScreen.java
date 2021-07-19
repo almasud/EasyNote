@@ -19,6 +19,7 @@ import com.github.almasud.NotePad.models.Note;
 import com.github.almasud.NotePad.viewmodels.NoteVM;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
@@ -139,9 +140,16 @@ public class NoteFormScreen extends Fragment {
     }
 
     private void setNoteToUI(Note note) {
+        // Try to set the saved date into calendar
+        try {
+            mCalendar.setTime(mSimpleDateFormat.parse(note.getDate()));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        // Set saved note data into UI
         mViewBinding.etTitle.setText(note.getTitle());
         mViewBinding.etDetails.setText(note.getDetails());
-        mViewBinding.etDate.setText(mSimpleDateFormat.format(note.getDate()));
+        mViewBinding.etDate.setText(note.getDate());
         mViewBinding.etColor.setBackgroundColor(note.getColor());
     }
 
@@ -182,14 +190,14 @@ public class NoteFormScreen extends Fragment {
             // Try to save the note
             if (mNote != null) {
                 mNoteVM.update(new Note(
-                        mNote.getId(), title, details, date, color
-                        )).observe(getViewLifecycleOwner(), updatedId -> {
+                        mNote.getId(), title, details, date, color, mNote.isFavorite()
+                        )).observe(getViewLifecycleOwner(), isUpdated -> {
                     // Hide the progressbar layout and enable the UI
                     mViewBinding.noteFormScreenProgressBar.getRoot().setVisibility(View.GONE);
                     if (isAdded())
                         BaseApplication.enableDisableViewGroup(mViewBinding.getRoot(), true);
                     Snackbar snackbar;
-                    if (updatedId != null) {
+                    if (isUpdated) {
                         snackbar = Snackbar.make(
                                 requireActivity().findViewById(android.R.id.content),
                                 "Note successfully updated!",
@@ -217,7 +225,7 @@ public class NoteFormScreen extends Fragment {
                 });
             } else {
                 mNoteVM.insert(new Note(
-                        title, details, date, color
+                        title, details, date, color, false
                         )).observe(getViewLifecycleOwner(), insertedId -> {
                     // Hide the progressbar layout and enable the UI
                     mViewBinding.noteFormScreenProgressBar.getRoot().setVisibility(View.GONE);

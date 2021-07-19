@@ -28,4 +28,11 @@
     <string name="color_palette">Color palette</string>
     <string name="colors">Colors</string>
     <string name="no_note_yet">You haven\'t any note yet!</string>
+    <string name="note_retrieving_wait_message">Please wait while retrieving your note&#8230;</string>
+    <string name="notes_fetching_wait_message">Please wait while fetching your notes&#8230;</string>
+    <string name="note_delete_wait_message">Please wait while deleting a note&#8230;</string>
+    <string name="note_save_favorite_wait_message">Please wait while marking the note as favorite&#8230;</string>
+    <string name="action_yes">Yes</string>
+    <string name="action_no">No</string>
+    <string name="action_not_sure">Not sure</string>
 </resources>

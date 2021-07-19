@@ -11,124 +11,118 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <RelativeLayout
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/activity_vertical_margin"
+            android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+            app:cardElevation="10dp"
+            app:cardCornerRadius="10dp">
 
-            <androidx.cardview.widget.CardView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="@dimen/activity_vertical_margin"
-                android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
-                app:cardElevation="10dp"
-                app:cardCornerRadius="10dp">
+                android:orientation="vertical"
+                android:layout_margin="@dimen/activity_half_margin"
+                android:background="@color/white">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/inputLayoutTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/Theme.NotePad.InputLayoutStyleOutlineBox"
+                    app:hintTextColor="@color/colorSecondary"
+                    android:hint="@string/title"
+                    android:layout_marginBottom="@dimen/activity_vertical_margin">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/inputLayoutDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/Theme.NotePad.InputLayoutStyleOutlineBox"
+                    app:hintTextColor="@color/colorSecondary"
+                    android:hint="@string/details"
+                    android:layout_marginBottom="@dimen/activity_vertical_margin">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etDetails"
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:inputType="text|textMultiLine" />
+
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_margin="@dimen/activity_half_margin"
-                    android:background="@color/white">
+                    android:orientation="horizontal">
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/inputLayoutTitle"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:id="@+id/layoutDate"
                         style="@style/Theme.NotePad.InputLayoutStyleOutlineBox"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
                         app:hintTextColor="@color/colorSecondary"
-                        android:hint="@string/title"
+                        android:hint="@string/date"
+                        android:layout_marginEnd="@dimen/activity_half_margin"
                         android:layout_marginBottom="@dimen/activity_vertical_margin">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/etTitle"
+                            android:id="@+id/etDate"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:focusable="false"
+                            android:inputType="text"
+                            android:drawableEnd="@drawable/ic_arrow_forward_ios"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/layoutColor"
+                        style="@style/Theme.NotePad.InputLayoutStyleOutlineBox"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:hintTextColor="@color/colorSecondary"
+                        app:helperText="Pick a color"
+                        android:layout_marginBottom="@dimen/activity_vertical_margin">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etColor"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/colorSecondary"
+                            android:clickable="true"
+                            android:focusable="false"
                             android:inputType="text" />
-
                     </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/inputLayoutDetails"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        style="@style/Theme.NotePad.InputLayoutStyleOutlineBox"
-                        app:hintTextColor="@color/colorSecondary"
-                        android:hint="@string/details"
-                        android:layout_marginBottom="@dimen/activity_vertical_margin">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/etDetails"
-                            android:layout_width="match_parent"
-                            android:layout_height="150dp"
-                            android:inputType="text|textMultiLine" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/layoutDate"
-                            style="@style/Theme.NotePad.InputLayoutStyleOutlineBox"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="2"
-                            app:hintTextColor="@color/colorSecondary"
-                            android:hint="@string/date"
-                            android:layout_marginEnd="@dimen/activity_half_margin"
-                            android:layout_marginBottom="@dimen/activity_vertical_margin">
-
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/etDate"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:clickable="true"
-                                android:focusable="false"
-                                android:inputType="text"
-                                android:drawableEnd="@drawable/ic_arrow_forward_ios"/>
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/layoutColor"
-                            style="@style/Theme.NotePad.InputLayoutStyleOutlineBox"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            app:hintTextColor="@color/colorSecondary"
-                            app:helperText="Pick a color"
-                            android:layout_marginBottom="@dimen/activity_vertical_margin">
-
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/etColor"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:background="@color/colorSecondary"
-                                android:clickable="true"
-                                android:focusable="false"
-                                android:inputType="text" />
-                        </com.google.android.material.textfield.TextInputLayout>
-                    </LinearLayout>
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/buttonSubmit"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/create"
-                        android:textSize="18sp"
-                        android:textAllCaps="false"
-                        app:backgroundTint="@color/colorSecondary"
-                        android:textColor="@color/white"
-                        android:insetTop="0dp"
-                        android:insetBottom="0dp"
-                        android:layout_marginBottom="@dimen/activity_half_margin"/>
-
                 </LinearLayout>
 
-            </androidx.cardview.widget.CardView>
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/buttonSubmit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/create"
+                    android:textSize="18sp"
+                    android:textAllCaps="false"
+                    app:backgroundTint="@color/colorSecondary"
+                    android:textColor="@color/white"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:layout_marginBottom="@dimen/activity_half_margin"/>
 
-        </RelativeLayout>
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
 
     </androidx.core.widget.NestedScrollView>
 

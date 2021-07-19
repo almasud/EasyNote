@@ -16,10 +16,11 @@ import java.util.List;
 import java.util.Locale;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class NotesRVAdapter
-        extends RecyclerView.Adapter<NotesRVAdapter.NoteViewHolder> implements Filterable {
+public class NoteRVAdapter
+        extends RecyclerView.Adapter<NoteRVAdapter.NoteViewHolder> implements Filterable {
     private static final String TAG = "NotesRVAdapter";
     private List<Note> mNotes = new ArrayList<>();
     private List<Note> mFilteredNotes = new ArrayList<>();
@@ -30,6 +31,11 @@ public class NotesRVAdapter
     private SimpleDateFormat mDateFormatMonth = new SimpleDateFormat(
             "MMM", Locale.getDefault()
     );
+    private SetOnNoteClickListener mSetOnNoteClickListener;
+
+    public NoteRVAdapter(Fragment fragment) {
+        mSetOnNoteClickListener = (SetOnNoteClickListener) fragment;
+    }
 
     @NonNull
     @Override
@@ -43,6 +49,8 @@ public class NotesRVAdapter
     public void onBindViewHolder(@NonNull NoteViewHolder holder, int position) {
         Note note = mFilteredNotes.get(position);
         holder.setData(note);
+        // Set a listener for item click event
+        holder.itemView.setOnClickListener(v -> mSetOnNoteClickListener.onNoteClick(note));
     }
 
     @Override
@@ -57,12 +65,15 @@ public class NotesRVAdapter
 
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
-                if (constraint == null || constraint.length() == 0) {
+                if (constraint == null || constraint.toString().isEmpty()) {
+                    Log.d(TAG, "performFiltering: constraint is null or empty");
                     filterResults.count = mNotes.size();
                     filterResults.values = mNotes;
                 } else {
+                    Log.d(TAG, "performFiltering: constraint is not null or empty");
                     List<Note> resultNotes = new ArrayList<>();
                     String filterPattern = constraint.toString().toLowerCase(Locale.getDefault()).trim();
+
                     for (Note note : mNotes) {
                         try {
                             if (note.getTitle().toLowerCase(Locale.getDefault()).contains(filterPattern)
@@ -126,6 +137,7 @@ public class NotesRVAdapter
 
     // Set the Notes into Recyclerview
     public void setNotes(List<Note> notes) {
+        Log.d(TAG, "setNotes: is called");
         // Clear list data before any data set
         mNotes.clear();
         mFilteredNotes.clear();
@@ -135,5 +147,9 @@ public class NotesRVAdapter
         mFilteredNotes = notes;
         // Notify to refresh the Recyclerview
         notifyDataSetChanged();
+    }
+
+    public interface SetOnNoteClickListener {
+        void onNoteClick(Note note);
     }
 }
