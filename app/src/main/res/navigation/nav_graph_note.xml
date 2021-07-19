@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/navCalendar"
-        android:name="com.github.almasud.NotePad.views.fragments.CalendarScreen"
+        android:name="com.github.almasud.EasyNote.views.fragments.CalendarScreen"
         android:label="@string/calendar"
         tools:layout="@layout/fragment_calender"/>
     <fragment
         android:id="@+id/navNote"
-        android:name="com.github.almasud.NotePad.views.fragments.NoteScreen"
+        android:name="com.github.almasud.EasyNote.views.fragments.NoteScreen"
         android:label="@string/my_notes"
         tools:layout="@layout/fragment_note">
         <action
@@ -24,12 +24,12 @@
     </fragment>
     <fragment
         android:id="@+id/navHome"
-        android:name="com.github.almasud.NotePad.views.fragments.HomeScreen"
+        android:name="com.github.almasud.EasyNote.views.fragments.HomeScreen"
         android:label="@string/home"
         tools:layout="@layout/fragment_home"/>
     <fragment
         android:id="@+id/navFavorite"
-        android:name="com.github.almasud.NotePad.views.fragments.FavoriteScreen"
+        android:name="com.github.almasud.EasyNote.views.fragments.FavoriteScreen"
         android:label="@string/favorites"
         tools:layout="@layout/fragment_favorite">
         <action
@@ -38,17 +38,17 @@
     </fragment>
     <fragment
         android:id="@+id/navSettings"
-        android:name="com.github.almasud.NotePad.views.fragments.SettingScreen"
+        android:name="com.github.almasud.EasyNote.views.fragments.SettingScreen"
         android:label="@string/settings"
         tools:layout="@layout/fragment_setting"/>
     <fragment
         android:id="@+id/navNoteForm"
-        android:name="com.github.almasud.NotePad.views.fragments.NoteFormScreen"
+        android:name="com.github.almasud.EasyNote.views.fragments.NoteFormScreen"
         android:label="{title}"
         tools:layout="@layout/fragment_note_form" >
         <argument
             android:name="note"
-            app:argType="com.github.almasud.NotePad.models.Note"
+            app:argType="com.github.almasud.EasyNote.models.Note"
             app:nullable="true"
             android:defaultValue="@null"/>
         <argument
@@ -58,7 +58,7 @@
     </fragment>
     <fragment
         android:id="@+id/navNoteDetails"
-        android:name="com.github.almasud.NotePad.views.fragments.NoteDetailsScreen"
+        android:name="com.github.almasud.EasyNote.views.fragments.NoteDetailsScreen"
         android:label="{title}"
         tools:layout="@layout/fragment_note_details" >
         <argument

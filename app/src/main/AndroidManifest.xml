@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.github.almasud.NotePad">
+    package="com.github.almasud.EasyNote">
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:name=".BaseApplication"
+        android:name="com.github.almasud.EasyNote.BaseApplication"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.NotePad">
         <activity
-            android:name=".views.activity.MainScreen"
+            android:name="com.github.almasud.EasyNote.views.activity.MainScreen"
             android:label="@string/app_name"
             android:theme="@style/Theme.NotePad.NoActionBar">
             <intent-filter>
