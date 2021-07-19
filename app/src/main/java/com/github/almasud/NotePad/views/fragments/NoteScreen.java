@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,8 +34,10 @@ public class NoteScreen extends Fragment implements NoteRVAdapter.SetOnNoteClick
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
-        Log.d(TAG, "onCreateView: is called");
         mViewBinding = FragmentNoteBinding.inflate(inflater, container, false);
+        // Initialize the VM
+        mNoteVM = new NoteVM(requireActivity().getApplication());
+
         // Set recycler view, layout manager and adapter
         mNoteRVAdapter = new NoteRVAdapter(this);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
@@ -58,8 +59,6 @@ public class NoteScreen extends Fragment implements NoteRVAdapter.SetOnNoteClick
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Log.d(TAG, "onViewCreated: is called");
-        mNoteVM = new NoteVM(requireActivity().getApplication());
 
         // Show the progressbar layout and disable the UI
         mViewBinding.noteScreenProgressBar.progressBarText.setText(getString(R.string.notes_fetching_wait_message));
@@ -127,7 +126,6 @@ public class NoteScreen extends Fragment implements NoteRVAdapter.SetOnNoteClick
 
     @Override
     public void onDestroyView() {
-        Log.d(TAG, "onDestroyView: is called");
         mViewBinding = null;
         super.onDestroyView();
     }

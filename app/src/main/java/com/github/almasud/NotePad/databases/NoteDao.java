@@ -33,6 +33,9 @@ public interface NoteDao {
     @Query("SELECT * FROM tbl_note WHERE col_note_id=:id")
     Single<Note> getNote(int id);
 
+    @Query("SELECT COUNT(col_note_title) FROM tbl_note")
+    Single<Integer> getNoteCount();
+
     @Query("SELECT * FROM tbl_note WHERE col_note_favorite=1 ORDER BY " +
                        "CASE WHEN :isAsc = 1 THEN col_note_id END ASC," +
                        "CASE WHEN :isAsc = 0 THEN col_note_id END DESC")

@@ -98,10 +98,10 @@ public class NoteDetailsScreen extends Fragment {
                 // Set the Note title and description into UI
                 mViewBinding.tvNoteTitle.setText(note.getTitle());
                 mViewBinding.tvNoteDetails.setText(note.getDetails());
+
                 Log.d(TAG, "setNoteToUI: note is favorite: " + note.isFavorite());
                 int favoriteIcon = note.isFavorite() ?
                         R.drawable.ic_heart_fill : R.drawable.ic_heart;
-
                 // Set favorite note icon if the note is favorite otherwise set not favorite
                 mViewBinding.ivButtonFavorite.setImageDrawable(
                         ResourcesCompat.getDrawable(getResources(), favoriteIcon, null));
@@ -141,12 +141,6 @@ public class NoteDetailsScreen extends Fragment {
                         if (isUpdated) {
                             // Update the UI
                             setNoteToUI(mNote.getId());
-                            // Change the favorite icon
-//                            mViewBinding.ivButtonFavorite.setImageDrawable(ResourcesCompat.getDrawable(
-//                                    getResources(), notFavorite ?
-//                                            R.drawable.ic_heart_fill : R.drawable.ic_heart,
-//                                    null));
-
                             // Show a success message
                             String successMessage = notFavorite ?
                                     "This note is marked as favorite!" : "This note is unmarked as favorite!";

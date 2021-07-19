@@ -31,7 +31,11 @@
         android:id="@+id/navFavorite"
         android:name="com.github.almasud.NotePad.views.fragments.FavoriteScreen"
         android:label="@string/favorites"
-        tools:layout="@layout/fragment_favorite"/>
+        tools:layout="@layout/fragment_favorite">
+        <action
+            android:id="@+id/action_navFavorite_to_navNoteDetails"
+            app:destination="@id/navNoteDetails" />
+    </fragment>
     <fragment
         android:id="@+id/navSettings"
         android:name="com.github.almasud.NotePad.views.fragments.SettingScreen"

@@ -33,6 +33,7 @@ public class NoteVM extends AndroidViewModel {
     private final MutableLiveData<Note> mFavoriteMutableLiveData = new MutableLiveData<>();
     private final MutableLiveData<Boolean> mUpdateMutableLiveData = new MutableLiveData<>();
     private final MutableLiveData<Boolean> mDeleteMutableLiveData = new MutableLiveData<>();
+    private final MutableLiveData<Integer> mNoteCountMutableLiveData = new MutableLiveData<>();
     private CompositeDisposable mDisposable = new CompositeDisposable();
 
     public NoteVM(@NonNull Application application) {
@@ -43,6 +44,7 @@ public class NoteVM extends AndroidViewModel {
         // Load notes
         loadNotes();
         loadFavoriteNotes();
+        loadNotesCount();
     }
 
     public LiveData<Long> insert(Note note) {
@@ -173,6 +175,10 @@ public class NoteVM extends AndroidViewModel {
         return mFavoritesMutableLiveData;
     }
 
+    public LiveData<Integer> getNotesSize() {
+        return mNoteCountMutableLiveData;
+    }
+
     public LiveData<Boolean> delete(Note note) {
         mNoteDao.delete(note).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -237,6 +243,28 @@ public class NoteVM extends AndroidViewModel {
                     public void onError(@NotNull Throwable e) {
                         Log.w(TAG, "onError: Failed to load data: " + e.getMessage());
                         mFavoritesMutableLiveData.setValue(null);
+                    }
+                });
+    }
+
+    private void loadNotesCount() {
+        mNoteDao.getNoteCount().subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<Integer>() {
+                    @Override
+                    public void onSubscribe(@NotNull Disposable d) {
+                        mDisposable.add(d);
+                    }
+
+                    @Override
+                    public void onSuccess(@NotNull Integer totalNotes) {
+                        mNoteCountMutableLiveData.setValue(totalNotes);
+                    }
+
+                    @Override
+                    public void onError(@NotNull Throwable e) {
+                        Log.w(TAG, "onError: Failed to load notes count: " + e.getMessage());
+                        mNoteCountMutableLiveData.setValue(null);
                     }
                 });
     }

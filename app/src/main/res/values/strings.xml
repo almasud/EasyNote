@@ -4,6 +4,7 @@
     <!-- Strings used for fragments for navigation -->
     <string name="home">Home</string>
     <string name="my_notes">My Notes</string>
+    <string name="favorite_notes">Favorite Notes</string>
     <string name="calendar">Calendar</string>
     <string name="favorites">Favorites</string>
     <string name="settings">Settings</string>
